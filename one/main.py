@@ -6,12 +6,15 @@ SIZE = 30
 apple_count = 3
 apple_count_bl = 2
 
+
 # Получить новые координаты одного нового яблока
 def get_apple():
     return [randrange(0, RES, SIZE), randrange(0, RES, SIZE)]  # Example: [15, 10]
 
+
 def get_apple_bl():
     return [randrange(0, RES, SIZE), randrange(0, RES, SIZE)]  # Example: [15, 10]
+
 
 ''' Approach 1
 def get_apples(count):
@@ -21,6 +24,7 @@ def get_apples(count):
     return result
 '''
 
+
 # Получить список координат для указанного количества яблок
 # * Использует метод get_apple выше
 # Отвечая на вопрос. Ну вот создается список яблок из количества
@@ -28,22 +32,24 @@ def get_apples(count):
 def get_apples(count):
     return [get_apple() for i in range(0, count)]  # Example: [[15,10], [20,15]]
 
+
 def get_apples_bl(count):
     return [get_apple_bl() for i in range(0, count)]  # Example: [[15,10], [20,15]]
 
-x, y = randrange(0, RES, SIZE), randrange(0, RES, SIZE) # Случайные значения для стартовой позиции
+
+x, y = randrange(0, RES, SIZE), randrange(0, RES, SIZE)  # Случайные значения для стартовой позиции
 # apple = randrange(0, RES, SIZE), randrange(0, RES, SIZE)
 
 # Теперь вместо этого, мы можем писать так
 # Потому что этот метод возвращает то же самое, что и здесь справа от знака равно
 # Здесь кортеж был указан "коротким способом" это когда нет скобок вокруг, но 2 значения через запятую
 # a = 1,2 это то же самое что и a = (1,2)
-#apple_backup = (randrange(0, (RES - SIZE), SIZE), randrange(0, (RES - SIZE), SIZE))
-#apple_backup = get_apple()
+# apple_backup = (randrange(0, (RES - SIZE), SIZE), randrange(0, (RES - SIZE), SIZE))
+# apple_backup = get_apple()
 
 # Первое: Меняем кортеж на список
 # Второе: Выносим в ф-цию т.к. она нам еще пригодится
-apples = get_apples(apple_count) # Ну другое же дело, и красивее выглядит и понятно
+apples = get_apples(apple_count)  # Ну другое же дело, и красивее выглядит и понятно
 apples_bl = get_apples_bl(apple_count_bl)
 
 dirs = {'W': True, 'S': True, 'A': True, 'D': True}
@@ -60,33 +66,40 @@ font_score = pygame.font.SysFont('Arial', 26, bold=True)
 font_end = pygame.font.SysFont('Arial', 66, bold=True)
 background = pygame.image.load('assets/1.jpg').convert()  # рисунок для фона
 
+
 def draw_background():
-    #sc.fill(pygame.Color('black'))
+    # sc.fill(pygame.Color('black'))
     sc.blit(background, (0, 0))
+
 
 def draw_snake():
     # рисуем змейку
     [(pygame.draw.rect(sc, pygame.Color('Green'), (i, j, SIZE - 2, SIZE - 2))) for i, j in snake]
 
+
 def draw_apples():
     for apple in apples:
         # То, о чем я говорил "взять вручную" координаты из яблока
         pygame.draw.rect(sc, pygame.Color('red'), (apple[0], apple[1], SIZE, SIZE))
-        #pygame.draw.rect(sc, pygame.Color('blue'), (apple_bl[0], apple_bl[1], SIZE, SIZE))  # backup apple
-        print('apl 0:', apple[0],'apl 1:', apple[1])
+        # pygame.draw.rect(sc, pygame.Color('blue'), (apple_bl[0], apple_bl[1], SIZE, SIZE))  # backup apple
+        print('apl 0:', apple[0], 'apl 1:', apple[1])
+
 
 def draw_apples_bl():
     for apple_bl in apples_bl:
         pygame.draw.rect(sc, pygame.Color('blue'), (apple_bl[0], apple_bl[1], SIZE, SIZE))  # backup apple
         print('apl 0:', apple_bl[0], 'apl 1:', apple_bl[1])
 
+
 def draw_score():
     render_score = font_score.render(f'SCORE: {score}', True, pygame.Color('orange'))
     sc.blit(render_score, (5, 5))
 
+
 def get_head():
     global snake
     return snake[-1][0], snake[-1][1]
+
 
 def check_apple_collision():
     global length
@@ -113,7 +126,7 @@ def check_apple_collision():
         # Ну или можно вариант проще, в одну строку развертыванием. Чтобы тебя не запутывать, сделаю как ниже
         # Здесь я просто сохраняю координаты в удобно читаемые названия переменных.
         snake_x, snake_y = get_head()
-        apple_x = apple[0] # Здесь одна координата, правильно. Но мы то перебираем целый список apples.
+        apple_x = apple[0]  # Здесь одна координата, правильно. Но мы то перебираем целый список apples.
         apple_y = apple[1]
 
         # Это вроде очевидно максимально, что тут написано ниже-- да понял - ядумал просто что они не  нужні в форе
@@ -128,6 +141,7 @@ def check_apple_collision():
             new_x, new_y = get_apple()
             apple[0] = new_x
             apple[1] = new_y
+
 
 def move_snake():
     global x
@@ -144,7 +158,7 @@ def move_snake():
 
 def check_game_over(x, y):
     global length
-    if x < 0 or x > RES - SIZE or y > RES - SIZE or y < 0 or length <1:  # границы экрана
+    if x < 0 or x > RES - SIZE or y > RES - SIZE or y < 0 or length < 1:  # границы экрана
         while True:
             render_end = font_end.render('GAME OVER', 1, pygame.Color('orange'))
             sc.blit(render_end, (RES // 2 - 200, RES // 3))
@@ -152,6 +166,7 @@ def check_game_over(x, y):
             for e in pygame.event.get():
                 if e.type == pygame.QUIT:
                     exit()
+
 
 def control_snake():
     global dirs
@@ -181,10 +196,12 @@ def control_snake():
         dx, dy = 1, 0
         dirs = {'W': True, 'S': True, 'A': False, 'D': True}
 
+
 def quit_listener():
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             exit()
+
 
 while True:
     # За то, намного легче смотреть и находить что за что отвечает. А не всё в одной куче - ну давай
