@@ -1,0 +1,69 @@
+# коментарии
+#print("результат : ", 137//7 ,".",sep="<", end="")
+# print("test line №2", end="")
+# print(" test 2 \ ' ")
+##number1 = int(input("число1:  " ))
+##number2 = int(input("число2:  "))
+##i=print("результат : ")
+#del number1
+##print (i, 3 + min(number2, number1))
+#print ("- Did Joffrey agree?\n- He did. He also said \"I love using \\n\".")
+# print(chr(126) + "\n" + chr(94) + "\n" + chr(37))
+#print(chr(126) + "\n"chr(94) + "\n"chr(37))
+
+#def random0_10():
+ #   from random import random
+  #  x = random ()
+   # y = int(input('ввиди число: '))
+    #print (round(x*y,2))
+#print (random0_10())
+
+
+
+#def truncate(x, y):
+ #   print (x[0:18], y)
+#x1 = str(input('введите текскт: '))
+#y2 = '....'
+#truncate(x1, y2)
+#def truncate(inText, inTrace):
+    #print(inText[0:5], inTrace)
+
+
+#text = input('введите текскт: ')
+#trace = '...'
+
+#truncate(text, trace)
+
+
+
+def cutSpaces(text):
+  cutted = text
+  for symbol in text:
+    cutted = cutted.replace(' ', '')
+  return cutted
+
+def get_hidden_card(cardNumber, starsCount = 4):
+    text = cardNumber[-starsCount:]
+    stars = '*' * starsCount
+    return stars + text
+
+card = '1111 2222 3333 4444 8888'
+cutted = cutSpaces(card)
+hidden = get_hidden_card(cutted)
+
+print(card)
+print(cutted)
+print(hidden)
+
+
+def is_leap_year(x):
+    return x % 400 == 0 or (x % 4 == 0 and x % 100 != 0)
+print (is_leap_year(2016))
+print (is_leap_year(2017))
+print (is_leap_year(2018))
+
+year = int(input())
+if year % 400 == 0 or (year % 4 == 0 and year % 100 != 0):
+    print ("Високосный")
+else:
+    print ('Обычный'

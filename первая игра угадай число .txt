@@ -1,0 +1,23 @@
+print('Игра -угадай число от 0 до 100 , путем последовательного приближения')
+def vvv():
+    from random import random
+    random()
+    x = int(random() * 100)
+    z = 0
+    while x != z:
+        z = int(input('введите число от 0  до 100 : '))
+        if x>z:
+             print('меньше')
+        if x<z:
+            print('больше')
+        if x==z:
+            print('угадал!!!', x)
+vvv()
+while True:
+    flag = input('хотите попробывать еще раз [да / нет ,: ')
+
+    if flag == 'да':
+        vvv()
+    else:
+        break
+#print(x)
